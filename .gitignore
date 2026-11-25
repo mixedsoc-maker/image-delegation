@@ -1,0 +1,16 @@
+# Python
+__pycache__/
+*.py[cod]
+
+# imgtool output / test fixtures
+.claude/tmp/
+
+# Local Claude Code settings
+.claude/settings.local.json
+
+# OS / editor
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/

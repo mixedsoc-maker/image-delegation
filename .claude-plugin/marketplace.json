@@ -1,0 +1,16 @@
+{
+  "name": "image-tools",
+  "description": "Plugins for working with images under strict per-request image limits.",
+  "owner": {
+    "name": "hskim"
+  },
+  "plugins": [
+    {
+      "name": "image-delegation",
+      "source": "./plugins/image-delegation",
+      "description": "Keep the main agent at 0 images; delegate screenshots, image files and PDF figures to fresh image-inspector subagents with explicit image budgets, enforced by a guard hook.",
+      "category": "productivity",
+      "tags": ["images", "screenshots", "pdf", "subagents"]
+    }
+  ]
+}

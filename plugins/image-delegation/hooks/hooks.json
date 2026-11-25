@@ -1,0 +1,28 @@
+{
+  "description": "image-delegation: inject the 0-image rule at session start; block image-producing calls in the main agent and enforce per-subagent image budgets.",
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "sh \"${CLAUDE_PLUGIN_ROOT}/scripts/py.sh\" --fail-open session_context.py",
+            "timeout": 15
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "^(Read|Agent|Task|SendMessage)$|^mcp__",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "sh \"${CLAUDE_PLUGIN_ROOT}/scripts/py.sh\" --fail-open image_guard.py",
+            "timeout": 15
+          }
+        ]
+      }
+    ]
+  }
+}

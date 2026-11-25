@@ -1,0 +1,29 @@
+{
+  "name": "image-delegation",
+  "displayName": "Image Delegation",
+  "version": "1.0.2",
+  "description": "Keep the main agent at 0 images. Screenshots, image files and PDF figures are viewed only by fresh image-inspector subagents, each with an explicit image budget. A guard hook enforces this for model servers that cap images per request.",
+  "author": {
+    "name": "hskim"
+  },
+  "license": "MIT",
+  "keywords": ["images", "screenshots", "pdf", "vision", "subagent", "context-budget"],
+  "userConfig": {
+    "hard_limit": {
+      "type": "number",
+      "title": "Hard image limit per context",
+      "description": "Maximum images the model server accepts in one request. Because the history is re-sent, this is also the lifetime cap of each context. Enforced by the guard hook.",
+      "default": 8,
+      "min": 1,
+      "max": 100
+    },
+    "default_budget": {
+      "type": "number",
+      "title": "Default IMAGE_BUDGET per inspector",
+      "description": "Image budget used when a delegation does not state one. Keep it below the hard limit so crops and re-checks have a margin.",
+      "default": 6,
+      "min": 1,
+      "max": 100
+    }
+  }
+}
