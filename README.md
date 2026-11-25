@@ -81,6 +81,14 @@ This writes to `.claude/settings.local.json`, which is git-ignored, so teammates
 
 Restart Claude Code (or run `/reload-plugins`) after installing.
 
+> **"2 userConfig options not yet set"**: you can ignore this message after install. It only means you have not saved values yet. Until you do, the plugin uses the defaults from `plugin.json` (`hard_limit=8`, `default_budget=6`). To skip the message, pass the values when you install. Use the same `--scope` as above:
+>
+> ```sh
+> claude plugin install image-delegation@image-tools --config hard_limit=8 --config default_budget=6
+> ```
+>
+> If the plugin is already installed, run `/plugin configure image-delegation@image-tools` in Claude Code and save. Saving the defaults unchanged is fine.
+
 ### Try it without installing
 
 ```sh
