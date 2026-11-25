@@ -126,6 +126,29 @@ claude plugin uninstall image-delegation@image-tools
 claude plugin marketplace remove image-tools
 ```
 
+## Resuming work after a session breaks (templates)
+
+A session that goes over the image limit fails with HTTP 400. `claude -c` resends the same history, so it cannot recover that session, and you must start a new one. Todo lists and plan-mode plans live only in the old conversation. To let a new session pick up where the old one stopped, keep the plan in a file in the repository.
+
+| File | Use |
+|---|---|
+| [templates/plan.md](templates/plan.md) | Checklist template (Korean): goal, done criteria, "resume here" block, steps with done criteria, decision log, progress log |
+| [templates/CLAUDE.md.snippet](templates/CLAUDE.md.snippet) | Rules to paste into your project's `CLAUDE.md` |
+
+The `CLAUDE.md` rules tell Claude to:
+
+- read `docs/plan.md` first and resume at the first unfinished step
+- check `git status` and `git log` against the plan before continuing
+- after each step, update the plan and commit it together with the code
+
+How to use them:
+
+1. Copy `templates/plan.md` to `docs/plan.md` in your project. You can also ask Claude in plan mode to fill it in.
+2. Paste the contents of `templates/CLAUDE.md.snippet` into your project's `CLAUDE.md`.
+3. If a session breaks, start a new one and say "continue" ("이어서 해줘").
+
+These templates are not part of the plugin and are not installed with it. Copy them by hand.
+
 ## Repository layout
 
 ```
@@ -137,6 +160,9 @@ plugins/image-delegation/
   hooks/hooks.json                     SessionStart context and PreToolUse guard
   scripts/                             image_guard.py, imgtool, dependency check
   tests/                               offline tests, fixtures, transcript auditor
+templates/
+  plan.md                              resumable task checklist (copy to docs/plan.md)
+  CLAUDE.md.snippet                    resume rules to paste into CLAUDE.md
 ```
 
 ## Limitations
